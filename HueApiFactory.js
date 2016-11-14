@@ -19,7 +19,7 @@ module.exports.create = function create () {
 
 function getBridgeAddress () {
   return config.read('bridge-address').then(address => {
-    if (address !== null) return address
+    if (address) return address
     return searchForBridgeAddress().then(address =>
       config.write('bridge-address', address).then(() => address))
   })
@@ -29,13 +29,13 @@ function searchForBridgeAddress () {
   return huejay.discover().then(bridges => {
     if (bridges.length === 0) return Promise.reject(new Error('No bridges found'))
     if (bridges.length > 1) return Promise.reject(new Error('Multiple bridges found'))
-    return bridges[0].ipaddress
+    return bridges[0].ip
   })
 }
 
 function getUsername (bridgeAddress) {
   return config.read('username').then(username => {
-    if (username !== null) return username
+    if (username) return username
     return pair(bridgeAddress).then(username =>
       config.write('username', username).then(() => username))
   })
