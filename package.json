@@ -1,0 +1,31 @@
+{
+  "name": "hue-device-presence",
+  "version": "1.0.0",
+  "description": "A CLIP presence sensor that detects the presence of a device on the network",
+  "main": "index.js",
+  "dependencies": {
+    "huejay": "^1.4.3",
+    "ping": "^0.2.1",
+    "promise-retry": "^1.1.1",
+    "shortid": "^2.2.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisMondok/device-presence.git"
+  },
+  "keywords": [
+    "Philips",
+    "Hue",
+    "Presence"
+  ],
+  "author": "Chris Mondok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisMondok/device-presence/issues"
+  },
+  "homepage": "https://github.com/ChrisMondok/device-presence#readme"
+}
