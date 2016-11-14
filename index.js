@@ -29,7 +29,7 @@ require('./HueApiFactory').create().then(client => {
         sensor.state.presence = now - lastSeen < args.delay
 
         return client.sensors.save(sensor)
-      }).then(null, e => console.error(e))
+      }).then(null, e => console.error(chalk.red.bold(e)))
     }
   })
 
