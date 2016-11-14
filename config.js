@@ -10,7 +10,7 @@ function Configuration (configDir = `${process.env.HOME}/.config/hue-device-pres
   fs.access(configDir, (err) => {
     if (err && err.code === 'ENOENT') {
       fs.mkdir(configDir, (err) => {
-        if (err) throw err
+        if (err && err.code !== 'EEXIST') throw err
         else console.log(`Created config directory ${configDir}`)
       })
     }
