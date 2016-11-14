@@ -21,12 +21,8 @@ config.readRequired('host').then(host => {
 
           sensor.state.presence = now - lastSeen < DEPARTURE_DELAY
 
-          client.sensors.save(sensor).then(null, e => {
-            console.error(e)
-          })
-        }, e => {
-          console.error(e)
-        })
+          return client.sensors.save(sensor)
+        }).then(null, e => console.error(e))
       }
     })
 
