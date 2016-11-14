@@ -52,5 +52,5 @@ function pair (bridgeAddress) {
       if (error.type === 101) retry()
       else console.error(`Unexpected error ${error.type}`)
     })
-  }, {retries: 5})
+  }, {retries: 5}).then(user => user.username)
 }
