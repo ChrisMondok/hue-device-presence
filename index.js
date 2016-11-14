@@ -2,17 +2,25 @@ const config = new (require('./config'))()
 const shortid = require('shortid')
 const ping = require('ping')
 
-const UPDATE_INTERVAL = 30000
+const UPDATE_INTERVAL = 30 * 1000 // 30 seconds
+const DEPARTURE_DELAY = 15 * 60 * 1000 // 15 minutes
 
 config.readRequired('host').then(host => {
   require('./HueApiFactory').create().then(client => {
     getSensor().then(sensor => {
+      var lastSeen = new Date(0)
+
       update()
       setInterval(update, UPDATE_INTERVAL)
 
       function update () {
+        var now = new Date()
+
         ping.promise.probe(host).then(res => {
-          sensor.state.presence = res.alive
+          if (res.alive) lastSeen = now
+
+          sensor.state.presence = now - lastSeen < DEPARTURE_DELAY
+
           client.sensors.save(sensor).then(null, e => {
             console.error(e)
           })
