@@ -40,11 +40,4 @@ Configuration.prototype.write = function writeConfig (key, value) {
   })
 }
 
-Configuration.prototype.readRequired = function readRequiredConfig (key) {
-  return this.read(key).then(value => {
-    console.assert(value !== undefined, `${key} is required`)
-    return value
-  })
-}
-
 module.exports = Configuration
